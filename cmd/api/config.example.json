@@ -1,0 +1,19 @@
+{
+    "Key": "PleaseReplaceMeWith32Characters!",
+    "MaxInvalidAttempts": 5,
+    "Port": "8080",
+    "Cors": {
+        "AllowedOrigins": ["*"],
+        "AllowedMethods": ["GET", "POST", "PUT", "DELETE"],
+        "AllowedHeaders": ["Authorization", "Content-Type", "Accept"]
+    },
+    "Auth": {
+        "SigningKey": "Please_Change_Me!",
+        "AccessTokenDurationMins": 20,
+        "RefreshTokenDurationHours": 8
+    },
+    "MySQL": {
+        "DSN": "user_id:user_password@/sendkey?parseTime=true",
+        "MigrationsDir": "../../internal/mysql/migrations/"
+    }
+}

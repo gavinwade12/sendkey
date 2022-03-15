@@ -1,0 +1,13 @@
+# ignore binaries
+*
+!*.*
+!*/
+*.exe
+
+# ignore config files
+**/config*.json
+# except the examples
+!**/config.example.json
+
+# ignore log files
+cmd/**/*.log
