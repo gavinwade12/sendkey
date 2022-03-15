@@ -16,7 +16,7 @@ func (s *entryStore) Create(e sendkey.Entry) error {
 	_, err := s.conn.Exec(`
 	INSERT INTO entries(id, name, sentByUserId, sentToEmail, nonce, value, invalidAttempts, createdAtUtc, expiresAtUtc)
 	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-		mysqlUUID(string(e.ID[:])), e.Name, mysqlUUID(string(e.SentByUserID[:])), e.SentToEmail,
+		mysqlUUID(e.ID[:]), e.Name, mysqlUUID(e.SentByUserID[:]), e.SentToEmail,
 		string(e.Nonce), string(e.Value), e.InvalidAttempts, e.CreatedAtUTC, e.ExpiresAtUTC)
 	return err
 }
@@ -129,7 +129,7 @@ func (s *entryStore) CreateClaimedEntry(ce sendkey.ClaimedEntry) error {
 	_, err := s.conn.Exec(`
 	INSERT INTO claimed_entries(entryId, name, sentByUserId, sentToEmail, claimedAtUtc)
 	VALUES (?, ?, ?, ?, ?);`,
-		mysqlUUID(string(ce.EntryID[:])), ce.Name, mysqlUUID(string(ce.SentByUserID[:])), ce.SentToEmail,
+		mysqlUUID(ce.EntryID[:]), ce.Name, mysqlUUID(ce.SentByUserID[:]), ce.SentToEmail,
 		ce.ClaimedAtUTC)
 	return err
 }
@@ -138,7 +138,7 @@ func (s *entryStore) CreateExpiredEntry(ee sendkey.ExpiredEntry) error {
 	_, err := s.conn.Exec(`
 	INSERT INTO expired_entries(entryId, name, sentByUserId, sentToEmail, tooManyAttempts, expiredAtUtc)
 	VALUES (?, ?, ?, ?, ?, ?);`,
-		mysqlUUID(string(ee.EntryID[:])), ee.Name, mysqlUUID(string(ee.SentByUserID[:])), ee.SentToEmail,
+		mysqlUUID(ee.EntryID[:]), ee.Name, mysqlUUID(ee.SentByUserID[:]), ee.SentToEmail,
 		ee.TooManyAttempts, ee.ExpiredAtUTC)
 	return err
 }
